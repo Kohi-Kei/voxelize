@@ -1,5 +1,13 @@
 # voxelize
 
+### ローカルでこのプロジェクトをダウンロードする
+前提: goの環境は構築済みであること
+
+``` bash
+export GOPATH=<voxelizeをダウンロードしたいディレクトリのパス>
+go get github.com/Kohi-Kei/voxelize
+```
+
 ### ディレクトリの解説
 
 ```text
