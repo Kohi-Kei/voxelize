@@ -1,19 +1,21 @@
 package main
 
 import (
-	"github.com/Kohi-Kei/voxelize/model"
-	"github.com/Kohi-Kei/voxelize/loader"
 	"io/ioutil"
 	"os"
+
+	"github.com/Kohi-Kei/voxelize/loader"
+	"github.com/Kohi-Kei/voxelize/model"
+	"github.com/Kohi-Kei/voxelize/writer"
 )
 
-const voxelSize model.VoxelSize = model.VoxelSize(1)
+const voxelSize model.VoxelSize = model.VoxelSize(0.1)
 const minPointsNum model.MinPointsNum = model.MinPointsNum(1)
 
 func main() {
 
 	fp := loader.OpenFilePointer()
-	
+
 	objeLoader := loader.New(loader.OBJ, fp)
 	obje := objeLoader.Execute()
 
@@ -21,4 +23,5 @@ func main() {
 	voxels := voxelization.CreateVoxels(minPointsNum)
 
 	ioutil.WriteFile("./asset/voxels.json", voxels.ToJSONBytes(), os.ModePerm)
+	writer.Writer(&voxels)
 }

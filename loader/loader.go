@@ -1,9 +1,10 @@
 package loader
 
 import (
+	"os"
+
 	"github.com/Kohi-Kei/voxelize/adapter"
 	"github.com/Kohi-Kei/voxelize/loader/obj"
-	"os"
 )
 
 // FormatType is the file type you'd like to laod
@@ -13,9 +14,9 @@ type FormatType string
 const OBJ FormatType = "obj"
 
 // New is
-func New( format FormatType, fp *os.File) adapter.Loader{
-	switch format{
-	case  OBJ:
+func New(format FormatType, fp *os.File) adapter.Loader {
+	switch format {
+	case OBJ:
 		return obj.NewLoader(fp)
 	default:
 	}
@@ -23,7 +24,7 @@ func New( format FormatType, fp *os.File) adapter.Loader{
 }
 
 //OpenFilePointer make a file pointer to a 3d file
-func OpenFilePointer() *os.File{
+func OpenFilePointer() *os.File {
 	var fp *os.File
 	var err error
 

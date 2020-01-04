@@ -9,7 +9,8 @@ type ix int
 type iy int
 type iz int
 
-type voxel struct {
+//Voxel is voxel
+type Voxel struct {
 	X ix `json:"x"int`
 	Y iy `json:"y"int`
 	Z iz `json:"z"int`
@@ -17,11 +18,11 @@ type voxel struct {
 }
 
 //Voxels is
-type Voxels []*voxel
+type Voxels []*Voxel
 
 //TODO
-func newVoxel(ix ix, iy iy, iz iz) *voxel {
-	return &voxel{ix, iy, iz, RGBA{}}
+func newVoxel(ix ix, iy iy, iz iz) *Voxel {
+	return &Voxel{ix, iy, iz, RGBA{}}
 }
 
 // ToJSONBytes is
@@ -31,4 +32,19 @@ func (voxels *Voxels) ToJSONBytes() []byte {
 		log.Fatal(ok)
 	}
 	return bytes
+}
+
+// GetVoxelNum is the number of voxels
+func (voxels *Voxels) GetVoxelNum() int {
+	return len(*voxels)
+}
+
+// GetCornerPointNum is
+func (voxels *Voxels) GetCornerPointNum() int {
+	return voxels.GetVoxelNum() * CornerPointNum
+}
+
+// GetTriangleFaceNum is
+func (voxels *Voxels) GetTriangleFaceNum() int {
+	return voxels.GetVoxelNum() * TriangleNum
 }

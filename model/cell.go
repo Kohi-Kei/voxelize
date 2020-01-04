@@ -1,6 +1,5 @@
 package model
 
-
 type cell struct {
 	points Points
 }
@@ -10,10 +9,8 @@ func (c *cell) getPointNum() int {
 }
 
 func (c *cell) getPoints() []*Point {
-	return c.points.points
+	return c.points
 }
-
-
 
 type cells [][][]*cell
 
@@ -31,7 +28,7 @@ func (cells *cells) add(point *Point) {
 
 // points []*Point
 func (cells *cells) init(point *Point) {
-	cell := &cell{points: Points{make([]*Point, 10)}}
+	cell := &cell{points: Points(make([]*Point, 10))}
 	(*cells)[int(point.X)][int(point.Y)][int(point.Z)] = cell
 }
 

@@ -24,7 +24,7 @@ func (lattice *lattice) pointsToCells() {
 }
 
 func (lattice *lattice) toVoxels(minPointsNum int) Voxels {
-	var voxels []*voxel
+	var voxels []*Voxel
 	for xi := 0; xi < lattice.xsize; xi++ {
 		for yi := 0; yi < lattice.ysize; yi++ {
 			for zi := 0; zi < lattice.zsize; zi++ {
@@ -38,6 +38,7 @@ func (lattice *lattice) toVoxels(minPointsNum int) Voxels {
 }
 
 func newLattice(obje *Obje, voxelSize VoxelSize) *lattice {
+	obje.scale(1.0 / float64(voxelSize))
 	quantizedObje := newQuantizedObje(obje, float64(voxelSize))
 	xsize, ysize, zsize := quantizedObje.CalcSize()
 	minx, miny, minz := quantizedObje.calcMinCoordiane()
@@ -60,5 +61,5 @@ func newQuantizedObje(obje *Obje, voxelSize float64) *Obje {
 		quantizedPoints = append(quantizedPoints, quantizedPoint)
 	}
 	return &Obje{
-		Points: Points{quantizedPoints}}
+		Points: Points(quantizedPoints)}
 }

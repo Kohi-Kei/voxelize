@@ -8,11 +8,6 @@ type Voxelization struct {
 	lattice *lattice
 }
 
-// func (voxelization *Voxelization) execute() {
-// 	lattice := voxelization.lattice
-// 	lattice.pointsToCells()
-// }
-
 //NewVoxelization is
 func NewVoxelization(obje *Obje, voxelSize VoxelSize) Voxelization {
 	lattice := newLattice(obje, voxelSize)

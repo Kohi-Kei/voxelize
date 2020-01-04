@@ -1,6 +1,8 @@
 package model
 
-import "math"
+import (
+	"math"
+)
 
 //X is a X coordinate
 type X float64
@@ -25,6 +27,11 @@ func (p *Point) translate(x X, y Y, z Z) {
 	p.Z += z
 }
 
+//TranslatedNewPoint is
+func (p *Point) TranslatedNewPoint(dx X, dy Y, dz Z) *Point {
+	return NewPoint(p.X+dx, p.Y+dy, p.Z+dz)
+}
+
 func (p *Point) quantized(quantizeSize float64) *Point {
 	qx := math.Trunc(float64(p.X) / quantizeSize)
 	qy := math.Trunc(float64(p.Y) / quantizeSize)
@@ -40,16 +47,17 @@ func (p *Point) scale(size float64) {
 }
 
 //Points is
-type Points struct {
-	points []*Point
-}
+// type Points struct {
+// 	points []*Point
+// }
+type Points []*Point
 
 //Add is
 func (points *Points) Add(p *Point) {
-	points.points = append(points.points, p)
+	*points = append(*points, p)
 }
 func (points *Points) translate(x X, y Y, z Z) {
-	for _, point := range points.points {
+	for _, point := range *points {
 		point.translate(x, y, z)
 	}
 }
@@ -60,7 +68,7 @@ func NewPoint(x X, y Y, z Z) *Point {
 }
 
 func (points Points) getPoints() []*Point {
-	return points.points
+	return points
 }
 
 func (points *Points) scale(size float64) {
