@@ -3,6 +3,8 @@ package model
 import (
 	"encoding/json"
 	"log"
+
+	"github.com/Kohi-Kei/voxelize/exporter"
 )
 
 type ix int
@@ -47,4 +49,9 @@ func (voxels *Voxels) GetCornerPointNum() int {
 // GetTriangleFaceNum is
 func (voxels *Voxels) GetTriangleFaceNum() int {
 	return voxels.GetVoxelNum() * TriangleNum
+}
+
+//Save .obj file
+func (voxels *Voxels) Save(exporter exporter.Exporter) {
+	exporter.Export()
 }

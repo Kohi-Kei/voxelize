@@ -4,9 +4,9 @@ import (
 	"io/ioutil"
 	"os"
 
+	"github.com/Kohi-Kei/voxelize/exporter/obj"
 	"github.com/Kohi-Kei/voxelize/loader"
 	"github.com/Kohi-Kei/voxelize/model"
-	"github.com/Kohi-Kei/voxelize/writer"
 )
 
 const voxelSize model.VoxelSize = model.VoxelSize(0.1)
@@ -23,5 +23,6 @@ func main() {
 	voxels := voxelization.CreateVoxels(minPointsNum)
 
 	ioutil.WriteFile("./asset/voxels.json", voxels.ToJSONBytes(), os.ModePerm)
-	writer.Writer(&voxels)
+	objExporter := obj.NewNonColoreExporter(&voxels)
+	voxels.Save(objExporter)
 }
