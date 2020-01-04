@@ -1,9 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
-	"os"
-
+	"github.com/Kohi-Kei/voxelize/exporter/json"
 	"github.com/Kohi-Kei/voxelize/exporter/obj"
 	"github.com/Kohi-Kei/voxelize/loader"
 	"github.com/Kohi-Kei/voxelize/model"
@@ -22,7 +20,10 @@ func main() {
 	voxelization := model.NewVoxelization(&obje, voxelSize)
 	voxels := voxelization.CreateVoxels(minPointsNum)
 
-	ioutil.WriteFile("./asset/voxels.json", voxels.ToJSONBytes(), os.ModePerm)
+	// ioutil.WriteFile("./asset/voxels.json", voxels.ToJSONBytes(), os.ModePerm)
+	jsonExporter := json.NewJSONExporter(&voxels)
+	voxels.Save(jsonExporter)
+
 	objExporter := obj.NewNonColoreExporter(&voxels)
 	voxels.Save(objExporter)
 }
