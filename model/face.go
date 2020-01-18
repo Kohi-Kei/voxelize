@@ -1,20 +1,17 @@
 package model
 
-//D is a A coordinate
-type D float64
+// vertexNum is a number of vertex
+type vertexNum int32
+type vertexNumArray []*vertexNum
 
-//E is a Y coordinate
-type E float64
+// texNum is a number of vertex
+type texNum int32
+type texNumArray []*texNum
 
-//C is a Z coordinate
-type C float64
-
-//Face is
-type Face struct {
-	D
-	E
-	C
-	RGBA
+//OriginFace is
+type OriginFace struct {
+	vertexNumArray
+	texNumArray
 }
 
 /*
@@ -38,14 +35,15 @@ func (p *Point) scale(size float64) {
 
 }
 */
+
 //Faces is
-type Faces struct {
-	faces []*Face
+type OriginFaces struct {
+	originfaces []*OriginFace
 }
 
 //Add is
-func (faces *Faces) Add(f *Face) {
-	faces.faces = append(faces.faces, f)
+func (originfaces *OriginFaces) Add(f *OriginFace) {
+	originfaces.originfaces = append(originfaces.originfaces, f)
 }
 
 /*
@@ -56,12 +54,12 @@ func (points *Points) translate(x X, y Y, z Z) {
 }*/
 
 //NewFace is
-func NewFace(x D, y E, z C) *Face {
-	return &Face{D: D(x), E: E(y), C: C(z), RGBA: RGBA{}}
+func NewFace(vertexArray vertexNumArray, textureArray texNumArray) *OriginFace {
+	return &OriginFace{vertexNumArray: vertexNumArray(vertexArray), texNumArray: texNumArray(textureArray)}
 }
 
-func (faces Faces) getFaces() []*Face {
-	return faces.faces
+func (originfaces OriginFaces) getOriginFaces() []*OriginFace {
+	return originfaces.originfaces
 }
 
 /*

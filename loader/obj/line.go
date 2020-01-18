@@ -34,6 +34,19 @@ func (line *line) toPoint() *model.Point {
 	return model.NewPoint(x, y, z)
 }
 
+func (line *line) toFace() *model.OriginFace {
+	vertexArr := []model.vertexNumArray
+	texArr := []model.texNumArray
+
+	for index, vertexInfo := range line.fields{
+		tmpVertexInfo := string.split(line.getField(index+1),'//')
+		vertexNum, textureNum := toSequentialNum(tmpVertexInfo[0], tmpVertexInfo[1])
+		vertexArr = append(vertexArr,vertexNum)
+		texArr = append(texArr,textureNum)
+	}
+	return model.NewFace(vertexArr,texArr)
+}
+
 func toCoordinates(array ...string) (model.X, model.Y, model.Z) {
 	x, errx := strconv.ParseFloat(array[0], 64)
 	y, erry := strconv.ParseFloat(array[1], 64)
@@ -48,4 +61,17 @@ func toCoordinates(array ...string) (model.X, model.Y, model.Z) {
 		panic(errz)
 	}
 	return model.X(x), model.Y(y), model.Z(z)
+}
+
+func toSequentialNum(array ...string) (model.vertexNum, model.texNum) {
+	vertexNum, errVertexNum := strconv.ParseFloat(array[0], 64)
+	texNum, errTexNum := strconv.ParseFloat(array[1], 64)
+
+	if errVertexNum != nil {
+		panic(errVertexNum)
+	}
+	if errTexNum != nil {
+		panic(errTexNum)
+	}
+	return model.vertexNum(vertexNum), model.texNum(texNum)
 }
