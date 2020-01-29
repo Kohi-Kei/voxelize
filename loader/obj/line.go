@@ -35,16 +35,19 @@ func (line *line) toPoint() *model.Point {
 }
 
 func (line *line) toFace() *model.OriginFace {
-	vertexArr := []model.vertexNumArray
-	texArr := []model.texNumArray
+	var vertexArr []model.VertexNum
+	var texArr []model.TexNum
 
-	for index, vertexInfo := range line.fields{
-		tmpVertexInfo := string.split(line.getField(index+1),'//')
+	for index, _ := range line.fields {
+		// split the line with "//"
+		tmpVertexInfo := strings.Split(line.getField(index+1), "//")
+		// insert data
 		vertexNum, textureNum := toSequentialNum(tmpVertexInfo[0], tmpVertexInfo[1])
-		vertexArr = append(vertexArr,vertexNum)
-		texArr = append(texArr,textureNum)
+		vertexArr = append(vertexArr, vertexNum)
+		texArr = append(texArr, textureNum)
 	}
-	return model.NewFace(vertexArr,texArr)
+
+	return model.NewFace(vertexArr, texArr)
 }
 
 func toCoordinates(array ...string) (model.X, model.Y, model.Z) {
@@ -63,7 +66,7 @@ func toCoordinates(array ...string) (model.X, model.Y, model.Z) {
 	return model.X(x), model.Y(y), model.Z(z)
 }
 
-func toSequentialNum(array ...string) (model.vertexNum, model.texNum) {
+func toSequentialNum(array ...string) (model.VertexNum, model.TexNum) {
 	vertexNum, errVertexNum := strconv.ParseFloat(array[0], 64)
 	texNum, errTexNum := strconv.ParseFloat(array[1], 64)
 
@@ -73,5 +76,5 @@ func toSequentialNum(array ...string) (model.vertexNum, model.texNum) {
 	if errTexNum != nil {
 		panic(errTexNum)
 	}
-	return model.vertexNum(vertexNum), model.texNum(texNum)
+	return model.VertexNum(vertexNum), model.TexNum(texNum)
 }

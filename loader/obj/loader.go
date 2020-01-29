@@ -21,7 +21,7 @@ func NewLoader(fp *os.File) *Loader {
 //Execute is
 func (loader *Loader) Execute() model.Obje {
 	var points model.Points
-	var originFaces model.originFaces
+	var originFaces model.OriginFaces
 
 	// definite 'scanner' for the file
 	scanner := bufio.NewScanner(loader.fp)

@@ -1,24 +1,24 @@
 package model
 
 // vertexNum is a number of vertex
-type vertexNum int32
-type vertexNumArray []*vertexNum
+type VertexNum int32
+type VertexNumArray []*VertexNum
 
 // texNum is a number of vertex
-type texNum int32
-type texNumArray []*texNum
+type TexNum int32
+type TexNumArray []*TexNum
 
 //OriginFace is
 type OriginFace struct {
-	vertexNumArray
-	texNumArray
+	VertexNumArray
+	TexNumArray
 }
 
 /*
 func (p *Point) translate(x X, y Y, z Z) {
 	p.X += x
 	p.Y += y
-	p.Z += z
+
 }
 
 func (p *Point) quantized(quantizeSize float64) *Point {
@@ -54,8 +54,19 @@ func (points *Points) translate(x X, y Y, z Z) {
 }*/
 
 //NewFace is
-func NewFace(vertexArray vertexNumArray, textureArray texNumArray) *OriginFace {
-	return &OriginFace{vertexNumArray: vertexNumArray(vertexArray), texNumArray: texNumArray(textureArray)}
+func NewFace(vertexArray []VertexNum, textureArray []TexNum) *OriginFace {
+	var vertexArrayPointer VertexNumArray
+	var texNumArrayPointer TexNumArray
+
+	for index := range vertexArray {
+		vertexArrayPointer = append(vertexArrayPointer, &vertexArray[index])
+	}
+
+	for index := range textureArray {
+		texNumArrayPointer = append(texNumArrayPointer, &textureArray[index])
+	}
+
+	return &OriginFace{VertexNumArray: vertexArrayPointer, TexNumArray: texNumArrayPointer}
 }
 
 func (originfaces OriginFaces) getOriginFaces() []*OriginFace {
