@@ -38,7 +38,7 @@ func (line *line) toFace() *model.OriginFace {
 	var vertexArr []model.VertexNum
 	var texArr []model.TexNum
 
-	for index, _ := range line.fields {
+	for index := range line.fields {
 		// split the line with "//"
 		tmpVertexInfo := strings.Split(line.getField(index+1), "//")
 		// insert data
@@ -48,6 +48,11 @@ func (line *line) toFace() *model.OriginFace {
 	}
 
 	return model.NewFace(vertexArr, texArr)
+}
+
+func (line *line) toVertexTex() *model.OriginVertexTex {
+	x, y := toTexCoordinates(line.getField(1), line.getField(2))
+	return model.NewVertexTex(x, y)
 }
 
 func toCoordinates(array ...string) (model.X, model.Y, model.Z) {
@@ -64,6 +69,19 @@ func toCoordinates(array ...string) (model.X, model.Y, model.Z) {
 		panic(errz)
 	}
 	return model.X(x), model.Y(y), model.Z(z)
+}
+
+func toTexCoordinates(array ...string) (model.TexX, model.TexY) {
+	x, errx := strconv.ParseFloat(array[0], 64)
+	y, erry := strconv.ParseFloat(array[1], 64)
+
+	if errx != nil {
+		panic(errx)
+	}
+	if erry != nil {
+		panic(erry)
+	}
+	return model.TexX(x), model.TexY(y)
 }
 
 func toSequentialNum(array ...string) (model.VertexNum, model.TexNum) {

@@ -22,6 +22,7 @@ func NewLoader(fp *os.File) *Loader {
 func (loader *Loader) Execute() model.Obje {
 	var points model.Points
 	var originFaces model.OriginFaces
+	var originVertexTexs model.OriginVertexTexs
 
 	// definite 'scanner' for the file
 	scanner := bufio.NewScanner(loader.fp)
@@ -43,6 +44,7 @@ func (loader *Loader) Execute() model.Obje {
 
 			// insert Texture Info
 			case obj.TextureVector:
+				originVertexTexs.Add(line.toVertexTex())
 
 			default:
 			}
