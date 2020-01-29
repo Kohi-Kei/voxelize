@@ -39,8 +39,12 @@ func (line *line) toFace() *model.OriginFace {
 	var texArr []model.TexNum
 
 	for index := range line.fields {
+		if index == 0 {
+			continue
+		}
+
 		// split the line with "//"
-		tmpVertexInfo := strings.Split(line.getField(index+1), "//")
+		tmpVertexInfo := strings.Split(line.getField(index), "/")
 		// insert data
 		vertexNum, textureNum := toSequentialNum(tmpVertexInfo[0], tmpVertexInfo[1])
 		vertexArr = append(vertexArr, vertexNum)
