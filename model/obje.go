@@ -8,6 +8,8 @@ import (
 //Obje is
 type Obje struct {
 	Points
+	OriginFaces
+	OriginVertexTexs
 }
 
 //MaxScaleSize is

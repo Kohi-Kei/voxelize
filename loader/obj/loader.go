@@ -50,5 +50,5 @@ func (loader *Loader) Execute() model.Obje {
 			}
 		}
 	}
-	return model.Obje{Points: points}
+	return model.Obje{Points: points, OriginFaces: originFaces, OriginVertexTexs: originVertexTexs}
 }
