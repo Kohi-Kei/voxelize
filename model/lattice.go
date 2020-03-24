@@ -29,7 +29,7 @@ func (lattice *lattice) toVoxels(minPointsNum int) Voxels {
 		for yi := 0; yi < lattice.ysize; yi++ {
 			for zi := 0; zi < lattice.zsize; zi++ {
 				if lattice.cells.pointsNum(X(xi), Y(yi), Z(zi)) >= minPointsNum {
-					voxels = append(voxels, newVoxel(ix(xi), iy(yi), iz(zi)))
+					voxels = append(voxels, newVoxel(ix(xi), iy(yi), iz(zi), RGBA{R: 0, G: 0, B: 0, A: 255}))
 				}
 			}
 		}

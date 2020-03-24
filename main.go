@@ -20,10 +20,9 @@ func main() {
 	voxelization := model.NewVoxelization(&obje, voxelSize)
 	voxels := voxelization.CreateVoxels(minPointsNum)
 
-	// ioutil.WriteFile("./asset/voxels.json", voxels.ToJSONBytes(), os.ModePerm)
 	jsonExporter := json.NewJSONExporter(&voxels)
 	voxels.Save(jsonExporter)
 
-	objExporter := obj.NewNonColoreExporter(&voxels)
+	objExporter := obj.NewExporter(&voxels)
 	voxels.Save(objExporter)
 }

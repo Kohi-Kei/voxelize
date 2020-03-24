@@ -1,12 +1,13 @@
 package model
 
-//MeshObje is
+//MeshObje has 8 points and 12 triangle faces
 type MeshObje struct {
 	Points
 	Faces
 }
 
 //NewMeshObje convert objData from voxels
+//A voxel point turns into 8 corner points
 func NewMeshObje(voxels *Voxels) *MeshObje {
 	corners := make([]*Point, voxels.GetCornerPointNum())
 	faces := make(Faces, voxels.GetTriangleFaceNum())

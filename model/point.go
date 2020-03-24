@@ -24,12 +24,12 @@ type Point struct {
 func (p *Point) translate(x X, y Y, z Z) {
 	p.X += x
 	p.Y += y
-	p.Z += z
+	p.Z += z	
 }
 
 //TranslatedNewPoint is
 func (p *Point) TranslatedNewPoint(dx X, dy Y, dz Z) *Point {
-	return NewPoint(p.X+dx, p.Y+dy, p.Z+dz)
+	return NewPoint(p.X+dx, p.Y+dy, p.Z+dz, p.RGBA)
 }
 
 func (p *Point) quantized(quantizeSize float64) *Point {
@@ -63,8 +63,8 @@ func (points *Points) translate(x X, y Y, z Z) {
 }
 
 //NewPoint is
-func NewPoint(x X, y Y, z Z) *Point {
-	return &Point{X: X(x), Y: Y(y), Z: Z(z), RGBA: RGBA{}}
+func NewPoint(x X, y Y, z Z, rgba RGBA) *Point {
+	return &Point{X: X(x), Y: Y(y), Z: Z(z), RGBA: RGBA(rgba)}
 }
 
 func (points Points) getPoints() []*Point {

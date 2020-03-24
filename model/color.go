@@ -9,7 +9,7 @@ type G uint8
 // B is blue
 type B uint8
 
-//A is a
+// A is alpha
 type A uint8
 
 // RGBA is color elements
@@ -19,3 +19,6 @@ type RGBA struct {
 	B
 	A
 }
+
+//Colors are a list of rgba color
+type Colors []RGBA

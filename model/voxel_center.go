@@ -10,7 +10,7 @@ type cornerPoint struct {
 }
 
 func (centerPoint *centerPoint) NewCornerPoint(dx X, dy Y, dz Z) *cornerPoint {
-	point := *NewPoint(centerPoint.X+dx, centerPoint.Y+dy, centerPoint.Z+dz)
+	point := *NewPoint(centerPoint.X+dx, centerPoint.Y+dy, centerPoint.Z+dz, centerPoint.RGBA)
 	return &cornerPoint{point}
 }
 

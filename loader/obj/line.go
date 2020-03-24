@@ -31,7 +31,7 @@ func (line *line) geometryType() obj.GeometoryType {
 
 func (line *line) toPoint() *model.Point {
 	x, y, z := toCoordinates(line.getField(1), line.getField(2), line.getField(3))
-	return model.NewPoint(x, y, z)
+	return model.NewPoint(x, y, z, model.RGBA{})
 }
 
 func toCoordinates(array ...string) (model.X, model.Y, model.Z) {

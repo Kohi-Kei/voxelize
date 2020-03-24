@@ -7,6 +7,7 @@ import (
 	"github.com/Kohi-Kei/voxelize/exporter"
 )
 
+//i means integer
 type ix int
 type iy int
 type iz int
@@ -22,9 +23,8 @@ type Voxel struct {
 //Voxels is
 type Voxels []*Voxel
 
-//TODO
-func newVoxel(ix ix, iy iy, iz iz) *Voxel {
-	return &Voxel{ix, iy, iz, RGBA{}}
+func newVoxel(ix ix, iy iy, iz iz, rgba RGBA) *Voxel {
+	return &Voxel{ix, iy, iz, RGBA(rgba)}
 }
 
 // ToJSONBytes is
@@ -34,6 +34,15 @@ func (voxels *Voxels) ToJSONBytes() []byte {
 		log.Fatal(ok)
 	}
 	return bytes
+}
+
+// GetColors returns voxel color
+func (voxels *Voxels) GetColors() Colors {
+	var colors []RGBA
+	for _, voxel := range *voxels {
+		colors = append(colors, voxel.RGBA)
+	}
+	return Colors(colors)
 }
 
 // GetVoxelNum is the number of voxels
